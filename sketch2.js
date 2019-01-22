@@ -7,6 +7,19 @@ var song;
 var fft;
 var button;
 var bassArray = [];
+var songIndex = 0;
+
+function toggleMusic() {
+  song.pause();
+  if (songIndex < 2) {
+    songIndex++;
+  } else {
+    songIndex = 0;
+  }
+  var songArray = ["wim.mp3", "uri.m4a", "kiwi.mp3"];
+  song = loadSound(songArray[songIndex]);
+  song.play();
+}
 
 function toggleSong() {
   if (song.isPlaying()) {
