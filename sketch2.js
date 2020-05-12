@@ -34,10 +34,12 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1000, 600);
+  createCanvas(800, 600);
   //   colorMode(HSB);
   //   angleMode(DEGREES);
   button = createButton("toggle");
+  button2 = createButton("toggle song");
+  button2.mousePressed(toggleMusic);
   button.mousePressed(toggleSong);
   song.play();
   fft = new p5.FFT(0.9, 128);
@@ -70,6 +72,8 @@ function draw() {
   var hmidy = map(hmid, 0, 256, 0, 500);
   var midy = map(mid, 0, 256, 0, 500);
 
+  var average = (trebley + lmidy + hmidy + midy) / 4;
+
   var center = fft.getCentroid();
   // console.log(center);
 
@@ -88,7 +92,7 @@ function draw() {
   line(60, 0, 60, hmidy);
   line(75, 0, 75, trebley);
   // line(75, 0, 75, 500);
-  line(90, 0, 90, centery);
+  line(90, 0, 90, average);
 
   var waveform = fft.waveform();
   noFill();
